@@ -5,4 +5,5 @@ import "dotenv/config";
 export default cleanEnv(process.env, {
   MONGO_CONNECTION_URI: str(),
   PORT: port(),
+  SESSION_SECRET: str(),
 });
