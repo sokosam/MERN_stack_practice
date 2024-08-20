@@ -4,12 +4,8 @@ import UserModel from "../models/user";
 import bcrypt from "bcrypt";
 
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
-  const authenticatedUserId = req.session.userId;
   try {
-    if (!authenticatedUserId) {
-      throw createHttpError(401, "User not authenticated");
-    }
-    const user = await UserModel.findById(authenticatedUserId)
+    const user = await UserModel.findById(req.session.userId)
       .select("+email")
       .exec();
     res.status(200).json(user);
@@ -43,7 +39,7 @@ export const signUp: RequestHandler<
     if (existingUsername) {
       throw createHttpError(
         409,
-        "Username already taken, please choose a different username"
+        "Username already taken, please choose a different username."
       );
     }
     const existingEmail = await UserModel.findOne({ email: email }).exec();
@@ -51,7 +47,7 @@ export const signUp: RequestHandler<
     if (existingEmail) {
       throw createHttpError(
         409,
-        "Email already taken, please choose a different Email"
+        "Email already taken, please choose a different Email."
       );
     }
 

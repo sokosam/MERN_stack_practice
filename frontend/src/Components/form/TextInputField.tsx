@@ -1,11 +1,5 @@
-import React from "react";
 import { Form } from "react-bootstrap";
-import {
-  RegisterOptions,
-  FieldError,
-  UseFormRegister,
-  appendErrors,
-} from "react-hook-form";
+import { FieldError, RegisterOptions, UseFormRegister } from "react-hook-form";
 
 interface TextInputFieldProps {
   name: string;
